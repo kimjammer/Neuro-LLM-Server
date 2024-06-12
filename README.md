@@ -10,9 +10,10 @@ Most parameters don't even do anything, it's barely enough to send queries and r
 
 [MiniCPM-Llama3-V 2.5](https://github.com/OpenBMB/MiniCPM-V) is a relatively small but very high quality multimodal llm.
 It's finally something small and good enough to use for Neuro! This program will download and use the int4 quantized version
-which takes up approximately 8GB of VRAM.
+which takes up approximately 8GB of VRAM. Since Neuro right now requires the full message before talking (defeating the purpose
+of streaming responses, I know), the end-of-speech to start-of-speech latency is 3-10 seconds depending on the length of the output.
 
-Right now, the server is only set up to do streaming response. I may (or may not) add a few more features and make the endpoint more
+Right now, the server is only set up to do streaming responses (Which is what Neuro uses). I may (or may not) add a few more features and make the endpoint more
 compliant to the OpenAI spec.
 
 ## Installation
@@ -26,4 +27,4 @@ conda activate MiniCPM-V
 pip install -r requirements.txt
 fastapi run
 ```
-btw fastapi dev does not work. (it will try to load the LLM twice and you'll probably run out of VRAM.)
+btw `fastapi dev` does not work. (it will try to load the LLM twice and you'll probably run out of VRAM.)
